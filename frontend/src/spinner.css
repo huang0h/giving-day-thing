@@ -12,7 +12,13 @@
   align-items: center;
   gap: 10px;
 
-  margin-bottom: 15px;
+  margin-bottom: 30px;
+
+  padding: 25px 15px;
+  width: 600px;
+
+  border: 1px dashed white;
+  border-radius: 5px;
 }
 
 .spinner-wheel > p {
@@ -23,4 +29,24 @@
 .spinner-wheel > .obscured-option {
   font-size: 2.4rem;
   color: #FFFFFF88;
+}
+
+.spinner > button {
+  padding: 5px 20px;
+  font-size: 1.3rem;
+
+  border: 2px solid white;
+  border-radius: 5px;
+  
+  color: white;
+  background-color: #FFFFFF33;
+}
+
+.spinner > button:hover {
+  /* background-color: #BBBBBB77; */
+  border-color: pink;
+}
+
+p.highlight {
+  color: red;
 }

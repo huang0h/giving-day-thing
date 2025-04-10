@@ -98,7 +98,7 @@ const VerticalSpinner = ({ options, setChosenOption: setChosenOption }: Vertical
         disabled={isSpinning ?? false}
         className='spinner-button'
       >
-        {isSpinning ? 'Spinning...' : 'Spin Carousel'}
+        {isSpinning ? 'Spinning...' : 'SPIN'}
       </button>
     </div>
   );

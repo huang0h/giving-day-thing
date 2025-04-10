@@ -8,7 +8,11 @@ dotenv.config()
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
 const MODEL = 'gemini-2.0-flash';
 
-const SYS_PROMPT = 'Respond to the prompt with a snarky, snappy, but overall positive attitude. Responses should be brief and to-the-point and primarily targeted to young adults familiar with some internet slang.';
+const SYS_PROMPT = `
+Respond to the prompt with a snarky, snappy, but overall positive attitude. 
+Responses should direct and to-the-point and primarily targeted to young adults familiar with some internet slang.
+Respond as if you were writing a longer comment online, using lowercase text, occasional improper grammar and emojis.
+`;
 
 const app = express();
 const port = 3000;

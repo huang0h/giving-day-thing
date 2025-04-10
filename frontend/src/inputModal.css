@@ -3,9 +3,19 @@
   flex-direction: row;
   gap: 20px;
 
-  margin-top: 30px;
+  /* margin-top: 15px; */
 
   min-height: 400px;
+}
+
+.input-section > p {
+  font-size: 1rem;
+}
+
+.input-section button {
+  padding: 3px 10px;
+  font-size: 1.1rem;
+  
 }
 
 .image-input {
@@ -13,7 +23,6 @@
   flex-direction: row;
   gap: 20px;
 }
-
 
 .inputmodal-result {
   display: flex;
@@ -25,8 +34,12 @@
   min-width: 400px;
 }
 
+textarea {
+  height: 300px;
+}
+
 .text-input > button {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .inputmodal-result > * {

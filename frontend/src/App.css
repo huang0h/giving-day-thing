@@ -19,7 +19,8 @@ h1 {
   text-align: center;
 }
 
-hr {
+#root >hr {
   border-color: white;
   width: 99vw;
 }
+

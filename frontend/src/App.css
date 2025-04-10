@@ -1,0 +1,33 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+
+  margin-top: 30px;
+}
+
+.spinner {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.spinner-wheel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 15px;
+}
+
+.spinner-wheel > p {
+  margin: 5px 0px;
+  font-size: 2.1rem;
+}
+
+.spinner-wheel > .obscured-option {
+  font-size: 1.7rem;
+  color: #00000088;
+}

@@ -1,35 +1,25 @@
+
+#root {
+  min-width: 800px;
+}
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: black;
+  color: white;
 
-  margin-top: 30px;
+  margin: 0;
+  
+  height: 100vh;
+  background: linear-gradient(127deg, rgba(13, 0, 255, 0.8) 0%, rgba(255, 0, 221, 0.8) 100%);
 }
 
-.spinner {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-
-  margin-top: 100px;
+h1 {
+  text-align: center;
 }
 
-.spinner-wheel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-
-  margin-bottom: 15px;
-}
-
-.spinner-wheel > p {
-  margin: 5px 0px;
-  font-size: 2.1rem;
-}
-
-.spinner-wheel > .obscured-option {
-  font-size: 1.7rem;
-  color: #00000088;
+hr {
+  border-color: white;
+  width: 99vw;
 }

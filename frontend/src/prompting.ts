@@ -2,13 +2,16 @@ const SERVER_URL = 'http://localhost:3000';
 
 export type PromptResult = { success: true, response: string } | { success: false, error: string }
 
-export async function testPrompt(): Promise<PromptResult> {
-  console.log('prompting...')
+export async function sendTextPrompt(taskCode: string, userInput: string): Promise<PromptResult> {
+  // console.log('prompting...')
   
-  const response = await fetch(`${SERVER_URL}`, {
+  const response = await fetch(`${SERVER_URL}/text/${taskCode}`, {
     method: 'POST',
     mode: 'cors',
-    // credentials: 'include',
+    body: JSON.stringify({ userInput }),
+    headers: {
+      "Content-Type": "application/json",
+    }
   }).then(response => response.json())
 
   console.log('prompting done!')
@@ -16,10 +19,10 @@ export async function testPrompt(): Promise<PromptResult> {
   return { success: true, response: response.text };
 }
 
-export async function testImagePrompt(imageB64: string): Promise<PromptResult> {
+export async function sendImagePrompt(taskCode: string, imageB64: string): Promise<PromptResult> {
   console.log('image prompting...')
 
-  const response = await fetch(`${SERVER_URL}/image`, {
+  const response = await fetch(`${SERVER_URL}/image/${taskCode}`, {
     method: 'POST',
     mode: 'cors',
     body: JSON.stringify({ imageB64 }),

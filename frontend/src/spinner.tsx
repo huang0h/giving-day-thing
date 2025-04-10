@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, SetStateAction } from 'react';
+import './spinner.css'
 
 const START_SPIN_SPEED = 50;
 const MAX_SPIN_SPEED = 250;
@@ -51,7 +52,6 @@ const VerticalSpinner = ({ options, setChosenOption: setChosenOption }: Vertical
         clearInterval(slowdownRef.current);
 
         setIsSpinning(false);
-        console.log(currentIndex);
       } else {
         // Update the spin speed
         setSpinSpeed(currentSpeed);

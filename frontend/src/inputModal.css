@@ -1,0 +1,34 @@
+.inputmodal-body {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+  margin-top: 30px;
+
+  min-height: 400px;
+}
+
+.image-input {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+
+.inputmodal-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.text-input {
+  min-width: 400px;
+}
+
+.text-input > button {
+  margin-top: 30px;
+}
+
+.inputmodal-result > * {
+  margin: 5px 0;
+}

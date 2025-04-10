@@ -22,11 +22,13 @@ function App() {
 
   return (
     <>
+      <h1>GET RATED BY AN AI !!!!</h1>
+      <hr />
       <VerticalSpinner options={prompts.map(p => p.task)} setChosenOption={setChosenOption} />
-      {chosenOption && (
+      {/* {chosenOption && (
         <p className='option-display'>{chosenOption}</p>
-      )}
-      {showModal && chosenOption && <InputModal option={chosenOption} showModal={showModal} setShowModal={setShowModal} />}
+      )} */}
+      {showModal && chosenOption && <InputModal selectedPrompt={prompts.find(p => p.task === chosenOption)!} showModal={showModal} setShowModal={setShowModal} />}
     </>
   );
 }

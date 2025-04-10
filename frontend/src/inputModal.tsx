@@ -1,11 +1,13 @@
 import { Input, Modal, Spin } from "antd";
 import { useState } from "react";
-import { testImagePrompt, testPrompt } from "./prompting";
+import { sendImagePrompt, sendTextPrompt } from "./prompting";
 import Webcam from "react-webcam";
-import { prompts } from "./types";
+import { Prompt } from "./types";
+import Markdown from "react-markdown";
+import "./inputModal.css";
 
 interface InputModalProps {
-  option: string;
+  selectedPrompt: Prompt;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
 }
@@ -18,7 +20,7 @@ enum SubmitState {
 }
 
 export default function InputModal({
-  option,
+  selectedPrompt,
   showModal,
   setShowModal,
 }: InputModalProps) {
@@ -37,9 +39,10 @@ export default function InputModal({
     setPromptResult(null);
   }
 
-  async function submitToPrompt() {
+  async function textPrompt() {
     setSubmitState(SubmitState.AWAITING);
-    const promptResult = await testPrompt();
+
+    const promptResult = await sendTextPrompt(selectedPrompt.code, inputText);
 
     if (promptResult.success) {
       setSubmitState(SubmitState.SUCCESS);
@@ -53,9 +56,8 @@ export default function InputModal({
   async function imagePrompt(imageB64: string) {
     setSubmitState(SubmitState.AWAITING);
     setInputImageB64(imageB64);
-    console.log(imageB64);
 
-    const promptResult = await testImagePrompt(imageB64.split("base64,")[1]);
+    const promptResult = await sendImagePrompt(selectedPrompt.code, imageB64.split("base64,")[1]);
 
     if (promptResult.success) {
       setSubmitState(SubmitState.SUCCESS);
@@ -69,54 +71,63 @@ export default function InputModal({
   return (
     <Modal
       open={showModal}
-      title={option}
+      title={selectedPrompt.task}
       width={1200}
       onOk={closeModal}
       onCancel={closeModal}
       onClose={closeModal}
       footer={null}
     >
-      {(() => {
-        const selectedPrompt = prompts.find((p) => p.task === option);
-        if (!selectedPrompt) return "ERROR";
+      <div className="inputmodal-body">
+        {(() => {
+          if (!selectedPrompt) return "ERROR";
+          
+          switch (selectedPrompt.inputMethod) {
+            case "image":
+              return (
+                <div className="image-input">
+                  {inputImageB64 === null ? (
+                    <Webcam
+                      audio={false}
+                      screenshotFormat="image/png"
+                      width={600}
+                      height={450}
+                      disablePictureInPicture
+                    >
+                      {({ getScreenshot }) => (
+                        <div>
+                          <button onClick={() => imagePrompt(getScreenshot())}>
+                            Take your shot. For Profit.
+                          </button>
+                        </div>
+                      )}
+                    </Webcam>
+                  ) : (
+                    <img src={inputImageB64} />
+                  )}
+                </div>
+              );
+            case "text":
+              return (
+                <div className="text-input">
+                  <Input.TextArea
+                    maxLength={300}
+                    showCount
+                    value={inputText}
+                    onChange={(event) => setInputText(event.target.value)}
+                    style={{minHeight: '250px', resize: 'none'}}
+                  />
+                  <button onClick={textPrompt}>Take your shot. For Profit.</button>
+                </div>
+              );
+          }
+        })()}
 
-        switch (selectedPrompt.inputMethod) {
-          case "image":
-            return (
-              <div className="image-input">
-                {inputImageB64 === null ? (
-                  <Webcam
-                    audio={false}
-                    screenshotFormat="image/png"
-                    width={600}
-                    height={450}
-                    disablePictureInPicture
-                  >
-                    {({ getScreenshot }) => (
-                      <button onClick={() => imagePrompt(getScreenshot())}>
-                        Take your shot. For Profit.
-                      </button>
-                    )}
-                  </Webcam>
-                ) : (
-                  <img src={inputImageB64} />
-                )}
-              </div>
-            );
-          case "text":
-            <div className="text-input">
-              <Input
-                maxLength={300}
-                showCount
-                value={inputText}
-                onChange={(event) => setInputText(event.target.value)}
-              />
-            </div>;
-        }
-      })()}
-
-      {submitState === SubmitState.AWAITING && <Spin />}
-      {promptResult}
+        {submitState === SubmitState.AWAITING && <Spin />}
+        <div className="inputmodal-result">
+          <Markdown>{promptResult}</Markdown>
+        </div>
+      </div>
     </Modal>
   );
 }

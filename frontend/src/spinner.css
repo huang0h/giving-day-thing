@@ -24,6 +24,7 @@
 .spinner-wheel > p {
   margin: 5px 0px;
   font-size: 3rem;
+  text-align: center;
 }
 
 .spinner-wheel > .obscured-option {

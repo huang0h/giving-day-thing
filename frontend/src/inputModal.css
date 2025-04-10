@@ -5,7 +5,14 @@
 
   /* margin-top: 15px; */
 
-  min-height: 400px;
+  justify-content: space-between;
+
+  min-height: 300px;
+}
+
+.input-section {
+  border-right: 2px dashed black;
+  padding-right: 10px;
 }
 
 .input-section > p {
@@ -22,6 +29,11 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
+}
+
+.loading-wrapper {
+  align-self: center;
+  margin-bottom: 30px;
 }
 
 .inputmodal-result {
@@ -44,4 +56,9 @@ textarea {
 
 .inputmodal-result > * {
   margin: 5px 0;
+  font-size: 1.2rem;
+}
+
+.input-random-stuff {
+  min-width: 350px;
 }
